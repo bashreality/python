@@ -1,0 +1,19 @@
+venv() {
+    if [ -d "venv" ]; then
+        # Jeśli środowisko istnieje, aktywuje je
+        source venv/bin/activate
+        echo "Dołączyłeś do istniejącego środowiska venv."
+    else
+        # Jeśli nie istnieje, tworzy nowe, instaluje zależności i aktywuje je
+        echo "Tworzenie nowego środowiska venv..."
+        python3 -m venv venv
+        source venv/bin/activate
+        echo "Instalowanie pipreqs..."
+        pip install pipreqs
+        echo "Generowanie requirements.txt..."
+        pipreqs . --force
+        echo "Instalowanie pakietów z requirements.txt..."
+        pip install -r requirements.txt
+        echo "Nowe środowisko venv utworzone i aktywowane!"
+    fi
+}
